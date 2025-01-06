@@ -11,14 +11,14 @@ CREATE TABLE department (
 CREATE TABLE employee_role (
   id SERIAL PRIMARY KEY,
   tile VARCHAR(30) NOT NULL,
-  employee_salary NUMBER,
+  employee_salary DECIMAL,
   department_id  INTEGER, FOREIGN KEY department(id)
 );
 
 CREATE TABLE employee (
-  id SERIAL PRIMARY KEY,
+  employee_id INSERT, FOREIGN KEY manager_id
   first_name VARCHAR(30)  NOT NULL,
   last_name VARCHAR(30) NOT NULL,
-  role_id INTEGER, FOREIGN KEY role(id),
-  manager_id INTEGER
+  role_id INTEGER, FOREIGN KEY employee_role(id),
+  manager_id SERIAL PRIMARY KEY
 );

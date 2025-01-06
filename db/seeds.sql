@@ -24,18 +24,18 @@ VALUES
 (9, 'Legal Advisor', 90000, 9),
 (10, 'Research Scientist', 100000, 10);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+INSERT INTO employee (employee_id, first_name, last_name, role_id, manager_id)
 VALUES
-(1, 'Alice', 'Johnson', 1, NULL),
-(2, 'Bob', 'Smith', 2, 1),
-(3, 'Clara', 'Williams', 3, 1),
-(4, 'David', 'Brown', 4, 2),
-(5, 'Ella', 'Jones', 5, 3),
-(6, 'Frank', 'Davis', 6, 4),
-(7, 'Grace', 'Miller', 7, 2),
-(8, 'Hank', 'Wilson', 8, 3),
-(9, 'Ivy', 'Moore', 9, 4),
-(10, 'Jack', 'Taylor', 10, 5);
+(1, 'Alice', 'Johnson', 1, NULL), -- Top-level HR Manager
+(2, 'Bob', 'Smith', 2, 1),       -- Reports to Alice
+(3, 'Clara', 'Williams', 3, 1),  -- Reports to Alice
+(4, 'David', 'Brown', 4, 2),     -- Reports to Bob
+(5, 'Ella', 'Jones', 5, 3),      -- Reports to Clara
+(6, 'Frank', 'Davis', 6, 4),     -- Reports to David
+(7, 'Grace', 'Miller', 7, 2),    -- Reports to Bob
+(8, 'Hank', 'Wilson', 8, 5),     -- Reports to Ella
+(9, 'Ivy', 'Moore', 9, 6),       -- Reports to Frank
+(10, 'Jack', 'Taylor', 10, 7);   -- Reports to Grace
 
 
 
