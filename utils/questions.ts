@@ -1,8 +1,8 @@
-const Task =[
-    ' Add Department',
+const task: string[] =[  
+    'Add Department',
     'Add Role',
     'Add Empoyee',
-    'Update Empoyee Role',
+    'Update Empoyee Role'
 ];
 
 
@@ -14,8 +14,9 @@ export const questions = [
 // Prompts user to choose the type of task the want to execute.
 
 { type: 'list',
-    name : '',
-    message: 'What would you like to do? '.
+    name : 'task',
+    message: 'What would you like to do? ',
+    choices: Object.keys(task)
 },
 
 //  Addes data to department table
@@ -76,7 +77,57 @@ message: 'Which employees role do you want to update?'
 
 
 
+import inquirer from 'inquirer';
 
+const tasks = [
+    'Add Department',
+    'Add Role',
+    'Add Employee',
+    'Update Employee Role',
+];
+
+async function main() {
+    const { selectedTask } = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'selectedTask',
+            message: 'What would you like to do?',
+            choices: tasks,
+        },
+    ]);
+
+    switch (selectedTask) {
+        case 'Add Department':
+            await askDepartmentName();
+            break;
+        case 'Add Role':
+            // Call function to handle adding a role
+            break;
+        case 'Add Employee':
+            // Call function to handle adding an employee
+            break;
+        case 'Update Employee Role':
+            // Call function to handle updating an employee's role
+            break;
+        default:
+            console.log('Invalid choice');
+    }
+}
+
+async function askDepartmentName() {
+    const { departmentName } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'departmentName',
+            message: 'What is the name of the department?',
+        },
+    ]);
+    console.log(`Department "${departmentName}" has been added.`);
+    // You can add logic here to save the department name
+}
+
+// Start the application
+main();
 
 
 
