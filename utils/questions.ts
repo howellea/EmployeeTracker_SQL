@@ -1,120 +1,49 @@
-const task: string[] =[  
-    'Add Department',
-    'Add Role',
-    'Add Empoyee',
-    'Update Empoyee Role'
-];
-
-
-
-
-
-export const questions = [
-
-// Prompts user to choose the type of task the want to execute.
-
-{ type: 'list',
-    name : 'task',
-    message: 'What would you like to do? ',
-    choices: Object.keys(task)
-},
-
-//  Addes data to department table
-{
-    type: 'input',
-    name : '',
-    message: 'What is the name of the department? '.
-},
-
-//  Addes data to roles table
-
-{ 
-    type: 'input',
-    name : '',
-    message: 'What is the name of the role?'.
-},
-{
-    type: 'input',
-    name : '',
-    message: 'What is the salary of the role?'.
-},
-{ type: 'input',
-    name : '',
-    message: 'Which department does the role belong to?',
-
-},
-
-//  Addes data to employee's table
-{
-    type: 'input',
-    name : '',
-    message: 'What is the employees first name?'
-},
-{ 
-    type: 'input',
-    name : '',
-    message: 'What is the employees last name?'.
-},
-{
-    type: 'input',
-    name : '',
-    message: 'What is the employees role?'.
-},
-
-{type: 'input',
-name : '',
-message: 'Who is the employees manager?'.
-},
-
-// Allows user to update the employee role from a list of employees
-    // TODOs: create a list of emplyees from db and allow user reference emplyee
-{
-type: 'input',
-name : '',
-message: 'Which employees role do you want to update?'
-},
-],
-
-
-
 import inquirer from 'inquirer';
 
-const tasks = [
-    'Add Department',
+const task: string[] = [
+    'View All Departments',
+    'View All Roles',
+    'View All Employees',
+    'Add A Department', 
     'Add Role',
     'Add Employee',
     'Update Employee Role',
 ];
 
-async function main() {
-    const { selectedTask } = await inquirer.prompt([
+async function QuestionPrompt(): Promise<void> {
+
+    const { task: selectedTask } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'selectedTask',
+            name: 'task',
             message: 'What would you like to do?',
-            choices: tasks,
+            choices: task,
         },
     ]);
 
     switch (selectedTask) {
-        case 'Add Department':
-            await askDepartmentName();
+        case 'Add A Department':
+            await askDepartQuestion();
             break;
         case 'Add Role':
-            // Call function to handle adding a role
+            await askRoleQuestion();
             break;
         case 'Add Employee':
-            // Call function to handle adding an employee
+            await askemployeeQuestion();
             break;
         case 'Update Employee Role':
-            // Call function to handle updating an employee's role
+            await updateEmpolyee();
             break;
         default:
             console.log('Invalid choice');
     }
+
+
 }
 
-async function askDepartmentName() {
+// Function to add a department
+async function askDepartQuestion(): Promise<void> {
+
     const { departmentName } = await inquirer.prompt([
         {
             type: 'input',
@@ -123,18 +52,67 @@ async function askDepartmentName() {
         },
     ]);
     console.log(`Department "${departmentName}" has been added.`);
-    // You can add logic here to save the department name
 }
 
-// Start the application
-main();
+// Function to add a role
+async function askRoleQuestion(): Promise<void> {
+    const { roleName, roleSalary, roleDepartment } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'roleName',
+            message: 'What is the name of the role?',
+        },
+        {
+            type: 'number',
+            name: 'roleSalary',
+            message: 'What is the salary of the role?',
+        },
+        {
+            type: 'input',
+            name: 'roleDepartment',
+            message: 'Which department does the role belong to?',
+        },
+    ]);
+    console.log(`Role "${roleName}" with salary ${roleSalary} in department "${roleDepartment}" has been added.`);
+}
 
+// Function to add an employee
+async function askemployeeQuestion(): Promise<void> {
+    const { employeefirstName, employeelastName, employeeRole, employeeManager } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employeefirstName',
+            message: 'What is the employee\'s first name?',
+        },
+        {
+            type: 'input',
+            name: 'employeelastName',
+            message: 'What is the employee\'s last name?',
+        },
+        {
+            type: 'input',
+            name: 'employeeRole',
+            message: 'What is the employee\'s role?',
+        },
+        {
+            type: 'input',
+            name: 'employeeManager',
+            message: 'Who is the employee\'s manager?',
+        },
+    ]);
+    console.log(`Employee "${employeefirstName} ${employeelastName}" with role "${employeeRole}" managed by "${employeeManager}" has been added.`);
+}
 
+// Function to update an employee's role
+async function updateEmpolyee(): Promise<void> {
+    const { updateManager } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'updateManager',
+            message: 'Which employee\'s role do you want to update?',
+        },
+    ]);
+    console.log(`Role updated for employee "${updateManager}".`);
+}
 
-
-
-
-
-
-
-
+export { QuestionPrompt };
