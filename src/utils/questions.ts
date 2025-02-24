@@ -1,5 +1,6 @@
+
 import inquirer from 'inquirer';
-import { addDepartment,getAllDepartments } from './serverQuery';
+import { addDepartment,getAllDepartments } from './serverQuery.js';
 
 const task = [
     { name: 'View All Departments', value: 'view_departments' },
@@ -12,7 +13,7 @@ const task = [
 ];
 
 async function QuestionPrompt() {
-    const { task: choice } = await inquirer.prompt([
+    const answers =  await inquirer.prompt([
         {
             type: 'list',
             name: 'task',
@@ -20,6 +21,7 @@ async function QuestionPrompt() {
             choices: task,
         },
     ]);
+const { task: choice } = answers;
 
     switch (choice) {
         case 'view_departments':

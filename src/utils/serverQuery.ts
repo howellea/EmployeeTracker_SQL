@@ -1,3 +1,4 @@
+
 import { pool } from '../config/connection.js';
 
 // Get all departments

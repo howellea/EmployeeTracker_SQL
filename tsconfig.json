@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "node",
+
     "outDir": "./dist",  // Output directory for compiled JavaScript
     "rootDir": "./src",  // Root directory for TypeScript source files
     "strict": true,
