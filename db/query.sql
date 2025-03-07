@@ -6,6 +6,7 @@ SELECT * FROM department ;
     -- View All Roles
 SELECT * FROM employee_role;
 
+
     -- View All Employees
 SELECT 
     e.first_name, 
@@ -32,7 +33,7 @@ INSERT INTO employee (role_id,first_name, last_name, employee_id);
 VALUES ($1, $2, $3)
 
    -- Add New Department
-INSERT INTO department (department_name)
+IINSERT INTO department (department_name) VALUES ($1)
 
 -- Update all changes 
     -- Update Empoyee Role
